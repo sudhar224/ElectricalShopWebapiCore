@@ -34,7 +34,7 @@ namespace ElecrticalShop.Controllers
         public ActionResult <Country> Create([FromBody]Country country)
         {
             var result = _db.Countries.AsQueryable().Where(x => x.Name.ToLower().Trim() == country.Name.ToLower().Trim()).Any();
-            if(result != null)
+            if(result)
             {
                 return Conflict("country already exist in the database");
             }
