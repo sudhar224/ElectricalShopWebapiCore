@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ElecrticalShop.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -47,7 +47,7 @@ namespace ElecrticalShop.Controllers
         public ActionResult <Product> Create([FromBody] Product objProduct )
         {
             var result = _db.Products.AsQueryable().Where(u => u.ProductName.ToLower().Trim() == objProduct.ProductName.ToLower().Trim()).Any();
-            if(result != null)
+            if(result)
             {
                 return Conflict("Product Name already exist");
             }
